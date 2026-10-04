@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>LOGIN</h1>
+    </header>
+
+    <form action="<?php echo htmlentities($_SERVER["PHP_SELF"]) ?>" id="form-login" method="POST">
+        <label for="">E-Mail</label> <br>
+        <input name="user_email" type="email" size="20" placeholder="Email User" maxlength="100" required> <br> <br>
+        <label for="">Password</label> <br>
+        <input name="user_password" type="password" size="20" placeholder="Password" maxlength="100" required> <br> <br>
+        <input name="login" type="submit" value="Login">
+    </form>
+
+    <pre>
+        <?php 
+            if (isset($_POST["login"]))
+                {
+                    // print_r ($_POST);
+                    $email = $_POST["user_email"];
+                    $password = $_POST["user_password"];
+
+                    echo $email. "<br>";
+                    echo $password;
+                }
+        ?>
+    </pre>
+</body>
+</html>
