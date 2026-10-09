@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Basic</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #222;
+        }
+        .card {
+            background: #fff;
+            width: 100%;
+            max-width: 380px;
+            padding: 32px 28px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+        }
+        h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+        p.subtitle { font-size: 14px; color: #666; margin-bottom: 24px; }
+        label { display: block; font-size: 14px; margin-bottom: 6px; }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        input:focus { outline: none; border-color: #111; }
+        button {
+            width: 100%;
+            padding: 11px;
+            font-size: 14px;
+            font-weight: 600;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover { background: #333; }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Form Basic</h1>
+        <p class="subtitle">Isi data di bawah ini.</p>
+
+        <form action="proses_form-basic.php" method="POST" autocomplete="off">
+            <label for="nama">Nama</label>
+            <input id="nama" name="nama" type="text" placeholder="Nama lengkap" maxlength="100" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="nama@email.com" maxlength="100" required>
+
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="••••••••" maxlength="100" required>
+
+            <button type="submit" name="submit" value="kirim">Kirim</button>
+        </form>
+    </main>
+</body>
+</html>
