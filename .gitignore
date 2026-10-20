@@ -1,0 +1,11 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Database buku tamu
+data/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
