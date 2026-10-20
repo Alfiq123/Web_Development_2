@@ -1,0 +1,27 @@
+# Docker image untuk buku tamu (Node.js murni + node:sqlite, tanpa dependensi npm).
+# Build : docker build -f Dockerfile.node -t buku-tamu .
+# Run   : docker run -d -p 3000:3000 -v buku-tamu-data:/data buku-tamu
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Verifikasi modul bawaan node:sqlite tersedia di image ini.
+RUN node -e "require('node:sqlite'); console.log('node:sqlite OK')"
+
+COPY package.json ./
+COPY init.sql/ ./init.sql/
+COPY src/ ./src/
+
+# Folder data untuk file database, dimiliki oleh user non-root `node`.
+RUN mkdir -p /data && chown -R node:node /data
+
+ENV NODE_ENV=production \
+    PORT=3000 \
+    HOST=0.0.0.0 \
+    DB_PATH=/data/guestbook.db
+
+EXPOSE 3000
+
+USER node
+
+CMD ["node", "--disable-warning=ExperimentalWarning", "src/server.js"]
