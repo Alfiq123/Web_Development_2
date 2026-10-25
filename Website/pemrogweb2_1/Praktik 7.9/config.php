@@ -1,6 +1,7 @@
 <?php
 // 1. Simpan koneksi ke dalam variabel $koneksi
-$koneksi = mysqli_connect("localhost", "root", "root123");
+# $koneksi = mysqli_connect("localhost", "root", "root123");
+$koneksi = mysqli_connect("host.docker.internal", "root", "root123");
 
 // 2. Oper variabel $koneksi sebagai argumen pertama
 mysqli_select_db($koneksi, "upload_download");

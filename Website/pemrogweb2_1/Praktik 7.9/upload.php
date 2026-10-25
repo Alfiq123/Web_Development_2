@@ -25,7 +25,7 @@
                 <b>.doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .rar, .zip</b> 
                 dan besar file (file size) maksimal hanya 1 MB.
             </p>
-            
+
             <?php
             include ("config.php");
             if (isset($_POST["upload"])) {
