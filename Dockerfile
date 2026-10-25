@@ -9,4 +9,4 @@ COPY Website/pemrogweb2_1/ /var/www/html/
 EXPOSE 80
 
 # Copy configuration, whatever
-COPY Website/pemrogweb2_1/custom-php.ini /usr/local/etc/php/conf.d/custom.ini
+## COPY Website/pemrogweb2_1/custom-php.ini /usr/local/etc/php/conf.d/custom.ini
