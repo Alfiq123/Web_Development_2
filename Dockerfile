@@ -1,7 +1,7 @@
 # Use the official PHP image with Apache built-in
 FROM php:8.2-apache
 
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 # Copy your local PHP files into the container's default web directory
 # COPY . /var/www/html/
