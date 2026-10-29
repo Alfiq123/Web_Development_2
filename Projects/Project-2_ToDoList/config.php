@@ -1,11 +1,17 @@
 <?php
-$host = "localhost";
+$host = "host.docker.internal";
 $db   = "todo_app";
 $user = "root";
-$pass = "";
+$pass = "root123";
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
+    $pdo = new PDO(
+        "mysql:host=$host;
+         dbname=$db;
+         charset=utf8mb4", 
+        $user, 
+        $pass
+    );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Koneksi gagal: " . $e->getMessage());

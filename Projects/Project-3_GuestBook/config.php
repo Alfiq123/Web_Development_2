@@ -7,7 +7,7 @@
 try {
     $pdo = new PDO(
         // "mysql:host=$host;dbname=$db;charset=utf8mb4",
-        "mysql:host=db;
+        "mysql:host=host.docker.internal;
          dbname=guestbook;
          charset=utf8mb4",
         "root",
