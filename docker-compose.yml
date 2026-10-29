@@ -11,8 +11,8 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: rahasia
-      MYSQL_DATABASE: bukutamu
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: guestbook
     volumes:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -24,7 +24,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_USER: root
-      PMA_PASSWORD: rahasia
+      PMA_PASSWORD: root123
     depends_on:
       - db
 
