@@ -3,10 +3,10 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 // Data server MySQL
-$db_host = 'localhost'; // --> server mysql
-$db_user = 'root';      // --> username
-$db_pass = '';          // --> password
-$db_name = 'crud';      // --> nama database
+$db_host = "host.docker.internal"; // --> server mysql
+$db_user = "root";                 // --> username
+$db_pass = "root123";              // --> password
+$db_name = "crud";                 // --> nama database
 
 try {
     // Fungsi untuk koneksi ke mysqli

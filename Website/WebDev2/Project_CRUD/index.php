@@ -32,7 +32,7 @@
 						</thead>
 						<tbody>
 							<?php
-							include 'koneksi.php';
+							include "koneksi.php";
 							$no = 0;
 							try {
 								$result = $koneksi->query("SELECT * FROM m_siswa ORDER BY nama ASC");
@@ -40,11 +40,11 @@
 									$no++;
 									?>
 									<tr class="">
-										<td><?php echo htmlspecialchars((string) ($row['id'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
-										<td><?php echo htmlspecialchars((string) ($row['angkatan'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
-										<td><?php echo htmlspecialchars((string) ($row['nama'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
-										<td><?php echo htmlspecialchars((string) ($row['nim'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
-										<td><?php echo htmlspecialchars((string) ($row['jurusan'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></td>
+										<td><?php echo htmlspecialchars((string) ($row["id"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
+										<td><?php echo htmlspecialchars((string) ($row["angkatan"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
+										<td><?php echo htmlspecialchars((string) ($row["nama"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
+										<td><?php echo htmlspecialchars((string) ($row["nim"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
+										<td><?php echo htmlspecialchars((string) ($row["jurusan"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
 										<td>
 											<a href="data_edit.php?id=<?php echo urlencode((string) ($row['id'] ?? '')); ?>" class="btn btn-info btn-sm">
 												<i class="glyphicon glyphicon-check"></i> Edit</a>
@@ -57,7 +57,7 @@
 								}
 								$result->free();
 							} catch (mysqli_sql_exception $e) {
-								echo '<tr><td colspan="6" class="text-danger">Gagal mengambil data: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '</td></tr>';
+								echo "<tr><td colspan='6' class='text-danger'>Gagal mengambil data: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8") . "</td></tr>";
 							}
 							?>
 						</tbody>

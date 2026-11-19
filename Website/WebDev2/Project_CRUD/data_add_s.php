@@ -1,25 +1,25 @@
 <?php
 // Meminta jembatan koneksi ke database
-include 'koneksi.php';
+include "koneksi.php";
 
 // Pastikan file hanya diproses melalui method POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	header('Location: data_add.php');
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+	header("Location: data_add.php");
 	exit;
 }
 
 // Menerima inputan secara aman (mencegah Undefined array key)
-$angkatan = trim($_POST['angkatan'] ?? '');
-$nama     = trim($_POST['nama'] ?? '');
-$nim      = trim($_POST['nim'] ?? '');
-$jurusan  = trim($_POST['jurusan'] ?? '');
+$angkatan = trim($_POST["angkatan"] ?? "");
+$nama     = trim($_POST["nama"] ?? "");
+$nim      = trim($_POST["nim"] ?? "");
+$jurusan  = trim($_POST["jurusan"] ?? "");
 
 // Pemeriksaan jika ada data inputan kosong
-if ($angkatan === '' || $nama === '' || $nim === '' || $jurusan === '') {
+if ($angkatan === "" || $nama === "" || $nim === "" || $jurusan === "") {
 	?>
 	<script>
-		alert('Masih ada data yang kosong');
-		document.location.href = 'data_add.php';
+		alert("Masih ada data yang kosong");
+		document.location.href = "data_add.php";
 	</script>
 	<?php
 	exit;
@@ -27,17 +27,17 @@ if ($angkatan === '' || $nama === '' || $nim === '' || $jurusan === '') {
 
 // Input ke tabel db dengan Prepared Statement
 try {
-	$stmt = $koneksi->prepare('INSERT INTO m_siswa (angkatan, nama, nim, jurusan) VALUES (?, ?, ?, ?)');
-	$stmt->bind_param('ssss', $angkatan, $nama, $nim, $jurusan);
+	$stmt = $koneksi->prepare("INSERT INTO m_siswa (angkatan, nama, nim, jurusan) VALUES (?, ?, ?, ?)");
+	$stmt->bind_param("ssss", $angkatan, $nama, $nim, $jurusan);
 	$stmt->execute();
 	$stmt->close();
 	?>
 	<script>
-		alert('Berhasil Disimpan');
-		document.location.href = 'index.php';
+		alert("Berhasil Disimpan");
+		document.location.href = "index.php";
 	</script>
 	<?php
 } catch (mysqli_sql_exception $e) {
-	exit('Perintah SQL Salah: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
+	exit("Perintah SQL Salah: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8"));
 }
 ?>
