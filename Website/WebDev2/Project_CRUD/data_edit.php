@@ -1,7 +1,6 @@
 <?php
 include "koneksi.php";
 
-// Validasi parameter id dari URL
 $id = isset($_GET["id"]) ? (int) $_GET["id"] : 0;
 if ($id <= 0) {
 	?>
@@ -24,7 +23,6 @@ try {
 	exit("Perintah SQL Salah: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8"));
 }
 
-// Pastikan data ditemukan agar tidak memicu error array offset on null
 if (!$row) {
 	?>
 	<script>
@@ -34,6 +32,8 @@ if (!$row) {
 	<?php
 	exit;
 }
+
+$photoFile = basename((string) ($row["photo"] ?? ""));
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,6 +75,14 @@ if (!$row) {
 					<div class="form-group">
 						<label>Jurusan</label>
 						<input type="text" class="form-control" name="jurusan" value="<?php echo htmlspecialchars((string) ($row["jurusan"] ?? ""), ENT_QUOTES, "UTF-8"); ?>" required>
+					</div>
+					<div class="form-group">
+						<label>Photo</label><br>
+						<?php if ($photoFile !== "" && !str_contains($photoFile, "\0") && is_file("img/" . $photoFile)): ?>
+							<img src="img/<?php echo htmlspecialchars(rawurlencode($photoFile), ENT_QUOTES, "UTF-8"); ?>" style="width: 120px; margin-bottom: 8px;" alt="Photo"><br>
+						<?php endif; ?>
+						<input type="file" class="form-control" name="photo" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+						<i style="display: block; font-size: 11px; color: red; margin-top: 4px;">Abaikan jika tidak merubah gambar</i>
 					</div>
 					<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
 					<button type="reset" class="btn btn-default"><i class="fa fa-file-text"></i> Bersih</button>

@@ -1,8 +1,7 @@
 <?php
-// HAPUS
+// HAPUS DATA + FILE PHOTO
 include "koneksi.php";
 
-// Validasi parameter id dari URL
 $id = isset($_GET["id"]) ? (int) $_GET["id"] : 0;
 if ($id <= 0) {
 	?>
@@ -15,6 +14,13 @@ if ($id <= 0) {
 }
 
 try {
+	// Ambil nama file photo sebelum baris dihapus
+	$stmtSelect = $koneksi->prepare("SELECT photo FROM m_siswa WHERE id = ?");
+	$stmtSelect->bind_param("i", $id);
+	$stmtSelect->execute();
+	$row = $stmtSelect->get_result()->fetch_assoc();
+	$stmtSelect->close();
+
 	$stmt = $koneksi->prepare("DELETE FROM m_siswa WHERE id = ?");
 	$stmt->bind_param("i", $id);
 	$stmt->execute();
@@ -22,6 +28,10 @@ try {
 	$stmt->close();
 
 	if ($affected > 0) {
+		$photoFile = basename((string) ($row["photo"] ?? ""));
+		if ($photoFile !== "" && !str_contains($photoFile, "\0") && is_file("img/" . $photoFile)) {
+			unlink("img/" . $photoFile);
+		}
 		?>
 		<script>
 			alert("Berhasil Dihapus");

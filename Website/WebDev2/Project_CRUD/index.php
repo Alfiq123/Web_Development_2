@@ -27,6 +27,7 @@
 								<th>Nama</th>
 								<th>NIM</th>
 								<th>Jurusan</th>
+								<th>Photo</th>
 								<th>Aksi</th>
 							</tr>
 						</thead>
@@ -38,6 +39,7 @@
 								$result = $koneksi->query("SELECT * FROM m_siswa ORDER BY nama ASC");
 								while ($row = $result->fetch_assoc()) {
 									$no++;
+									$photoFile = basename((string) ($row["photo"] ?? ""));
 									?>
 									<tr class="">
 										<td><?php echo htmlspecialchars((string) ($row["id"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
@@ -45,10 +47,17 @@
 										<td><?php echo htmlspecialchars((string) ($row["nama"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
 										<td><?php echo htmlspecialchars((string) ($row["nim"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
 										<td><?php echo htmlspecialchars((string) ($row["jurusan"] ?? ""), ENT_QUOTES, "UTF-8"); ?></td>
+										<td style="text-align: center;">
+											<?php if ($photoFile !== "" && !str_contains($photoFile, "\0") && is_file("img/" . $photoFile)): ?>
+												<img src="img/<?php echo htmlspecialchars(rawurlencode($photoFile), ENT_QUOTES, "UTF-8"); ?>" style="width: 120px;" alt="Photo">
+											<?php else: ?>
+												<span class="text-muted">Tidak ada foto</span>
+											<?php endif; ?>
+										</td>
 										<td>
-											<a href="data_edit.php?id=<?php echo urlencode((string) ($row['id'] ?? '')); ?>" class="btn btn-info btn-sm">
+											<a href="data_edit.php?id=<?php echo urlencode((string) ($row["id"] ?? "")); ?>" class="btn btn-info btn-sm">
 												<i class="glyphicon glyphicon-check"></i> Edit</a>
-											<a href="javascript:;" data-id="<?php echo htmlspecialchars((string) ($row['id'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>"
+											<a href="javascript:;" data-id="<?php echo htmlspecialchars((string) ($row["id"] ?? ""), ENT_QUOTES, "UTF-8"); ?>"
 												data-toggle="modal" data-target="#modal-konfirmasi" class="btn btn-warning btn-sm">
 												<i class="glyphicon glyphicon-trash"></i> Hapus</a>
 										</td>
@@ -57,7 +66,7 @@
 								}
 								$result->free();
 							} catch (mysqli_sql_exception $e) {
-								echo "<tr><td colspan='6' class='text-danger'>Gagal mengambil data: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8") . "</td></tr>";
+								echo "<tr><td colspan='7' class='text-danger'>Gagal mengambil data: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8") . "</td></tr>";
 							}
 							?>
 						</tbody>
@@ -96,7 +105,7 @@
 	<script src="js/dataTables.bootstrap.js"></script>
 	<script>
 		$(document).ready(function () {
-			$('#dataTables-example').dataTable();
+			$("#dataTables-example").dataTable();
 		});
 	</script>
 

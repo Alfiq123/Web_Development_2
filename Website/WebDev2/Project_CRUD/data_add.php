@@ -21,7 +21,7 @@
 				<form method="post" action="data_add_s.php" enctype="multipart/form-data">
 					<div class="form-group">
 						<label>Angkatan</label>
-						<input type="text" class="form-control" name="angkatan" placeholder="Ini contoh input text dengan placeholder" required>
+						<input type="text" class="form-control" name="angkatan" placeholder="ex. 2024" required>
 					</div>
 					<div class="form-group">
 						<label>Nama</label>
@@ -37,7 +37,7 @@
 					</div>
 					<div class="form-group">
 						<label>Photo</label>
-						<input type="file" class="form-control" name="photo" required></input>
+						<input type="file" class="form-control" name="photo" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required>
 					</div>
 					<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
 					<button type="reset" class="btn btn-default"><i class="fa fa-file-text"></i> Bersih</button>

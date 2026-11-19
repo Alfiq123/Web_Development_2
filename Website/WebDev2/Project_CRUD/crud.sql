@@ -8,3 +8,5 @@ CREATE TABLE m_siswa (
     nim      VARCHAR(13) NOT NULL,
     jurusan  VARCHAR(20) NOT NULL
 );
+
+ALTER TABLE m_siswa ADD COLUMN photo VARCHAR(100) NULL AFTER jurusan;
