@@ -27,7 +27,6 @@ if ($angkatan === "" || $nama === "" || $nim === "" || $jurusan === "" || $photo
 	exit;
 }
 
-// Pemeriksaan status error upload dari PHP
 if ($fileError !== UPLOAD_ERR_OK) {
 	?>
 	<script>
@@ -38,7 +37,6 @@ if ($fileError !== UPLOAD_ERR_OK) {
 	exit;
 }
 
-// Validasi ekstensi dan keaslian file gambar
 $ekstensi_diperbolehkan = ["png", "jpg", "jpeg"];
 $ekstensi = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
 
@@ -63,12 +61,10 @@ if ($imageInfo === false || !in_array($imageInfo[2], [IMAGETYPE_JPEG, IMAGETYPE_
 	exit;
 }
 
-// Pastikan folder img ada
 if (!is_dir("img")) {
 	mkdir("img", 0755, true);
 }
 
-// Buat nama file aman dan tidak melebihi batas kolom VARCHAR(100)
 $nama_asli = preg_replace("/[^A-Za-z0-9._-]/", "_", basename($photo));
 $nama_asli = substr($nama_asli, -80);
 $angka_acak = random_int(1, 999);
@@ -84,7 +80,6 @@ if (!move_uploaded_file($file_tmp, "img/" . $nama_gambar_baru)) {
 	exit;
 }
 
-// Simpan ke database menggunakan Prepared Statement
 try {
 	$stmt = $koneksi->prepare("INSERT INTO m_siswa (angkatan, nama, nim, jurusan, photo) VALUES (?, ?, ?, ?, ?)");
 	$stmt->bind_param("sssss", $angkatan, $nama, $nim, $jurusan, $nama_gambar_baru);
@@ -93,11 +88,10 @@ try {
 	?>
 	<script>
 		alert("Data berhasil ditambah.");
-		window.location = "index.php";
+		window.location = "index-Copy.php";
 	</script>
 	<?php
 } catch (mysqli_sql_exception $e) {
-	// Hapus file jika query database gagal agar tidak menjadi file sampah
 	if (is_file("img/" . $nama_gambar_baru)) {
 		unlink("img/" . $nama_gambar_baru);
 	}

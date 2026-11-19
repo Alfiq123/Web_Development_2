@@ -14,7 +14,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<div class="alert alert-warning">
-					<a href="index.php" class="btn btn-danger"><i class="glyphicon glyphicon-file"></i> Lihat Data</a>
+					<a href="index-Copy.php" class="btn btn-danger"><i class="glyphicon glyphicon-file"></i> Lihat Data</a>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -48,13 +48,6 @@
 	<script src="js/jquery-1.10.2.js"></script>
 	<!-- Bootstrap Js -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.js"></script>
-	<script src="js/dataTables.bootstrap.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('#dataTables-example').dataTable();
-		});
-	</script>
 
 </body>
 </html>

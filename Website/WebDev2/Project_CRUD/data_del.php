@@ -7,14 +7,13 @@ if ($id <= 0) {
 	?>
 	<script>
 		alert("ID tidak valid");
-		document.location.href = "index.php";
+		document.location.href = "index-Copy.php";
 	</script>
 	<?php
 	exit;
 }
 
 try {
-	// Ambil nama file photo sebelum baris dihapus
 	$stmtSelect = $koneksi->prepare("SELECT photo FROM m_siswa WHERE id = ?");
 	$stmtSelect->bind_param("i", $id);
 	$stmtSelect->execute();
@@ -35,14 +34,14 @@ try {
 		?>
 		<script>
 			alert("Berhasil Dihapus");
-			document.location.href = "index.php";
+			document.location.href = "index-Copy.php";
 		</script>
 		<?php
 	} else {
 		?>
 		<script>
 			alert("Data tidak ditemukan");
-			document.location.href = "index.php";
+			document.location.href = "index-Copy.php";
 		</script>
 		<?php
 	}

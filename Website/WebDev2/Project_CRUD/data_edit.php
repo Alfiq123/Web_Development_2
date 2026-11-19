@@ -6,7 +6,7 @@ if ($id <= 0) {
 	?>
 	<script>
 		alert("ID tidak valid");
-		document.location.href = "index.php";
+		document.location.href = "index-Copy.php";
 	</script>
 	<?php
 	exit;
@@ -27,7 +27,7 @@ if (!$row) {
 	?>
 	<script>
 		alert("Data tidak ditemukan");
-		document.location.href = "index.php";
+		document.location.href = "index-Copy.php";
 	</script>
 	<?php
 	exit;
@@ -51,7 +51,7 @@ $photoFile = basename((string) ($row["photo"] ?? ""));
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<div class="alert alert-warning">
-					<a href="index.php" class="btn btn-danger"><i class="glyphicon glyphicon-file"></i> Lihat Data</a>
+					<a href="index-Copy.php" class="btn btn-danger"><i class="glyphicon glyphicon-file"></i> Lihat Data</a>
 				</div>
 			</div>
 			<div class="panel-body">

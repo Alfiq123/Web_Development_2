@@ -3,7 +3,7 @@
 include "koneksi.php";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-	header("Location: index.php");
+	header("Location: index-Copy.php");
 	exit;
 }
 
@@ -21,7 +21,7 @@ if ($id <= 0) {
 	?>
 	<script>
 		alert("ID tidak valid");
-		document.location.href = "index.php";
+		document.location.href = "index-Copy.php";
 	</script>
 	<?php
 	exit;
@@ -38,7 +38,6 @@ if ($angkatan === "" || $nama === "" || $nim === "" || $jurusan === "") {
 	exit;
 }
 
-// Cek apakah user mengupload gambar baru
 if ($fileError !== UPLOAD_ERR_NO_FILE) {
 	if ($fileError !== UPLOAD_ERR_OK || $photo === "") {
 		?>
@@ -57,7 +56,7 @@ if ($fileError !== UPLOAD_ERR_NO_FILE) {
 		?>
 		<script>
 			alert("Ekstensi gambar yang boleh hanya jpg atau png.");
-			window.location = "data_edit.php?id=<?php echo $id; ?>";
+			window.location = "index-Copy.php";
 		</script>
 		<?php
 		exit;
@@ -94,7 +93,6 @@ if ($fileError !== UPLOAD_ERR_NO_FILE) {
 	}
 
 	try {
-		// Ambil nama foto lama agar bisa dihapus setelah update berhasil
 		$stmtOld = $koneksi->prepare("SELECT photo FROM m_siswa WHERE id = ?");
 		$stmtOld->bind_param("i", $id);
 		$stmtOld->execute();
@@ -102,20 +100,18 @@ if ($fileError !== UPLOAD_ERR_NO_FILE) {
 		$stmtOld->close();
 		$oldPhoto = basename((string) ($oldRow["photo"] ?? ""));
 
-		// Jalankan UPDATE dengan foto baru
 		$stmt = $koneksi->prepare("UPDATE m_siswa SET angkatan = ?, nama = ?, nim = ?, jurusan = ?, photo = ? WHERE id = ?");
 		$stmt->bind_param("sssssi", $angkatan, $nama, $nim, $jurusan, $nama_gambar_baru, $id);
 		$stmt->execute();
 		$stmt->close();
 
-		// Hapus foto lama jika ada dan berbeda dengan foto baru
 		if ($oldPhoto !== "" && $oldPhoto !== $nama_gambar_baru && !str_contains($oldPhoto, "\0") && is_file("img/" . $oldPhoto)) {
 			unlink("img/" . $oldPhoto);
 		}
 		?>
 		<script>
 			alert("Data berhasil diubah.");
-			window.location = "index.php";
+			window.location = "index-Copy.php";
 		</script>
 		<?php
 	} catch (mysqli_sql_exception $e) {
@@ -125,7 +121,6 @@ if ($fileError !== UPLOAD_ERR_NO_FILE) {
 		exit("Query gagal dijalankan: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, "UTF-8"));
 	}
 } else {
-	// Jalankan UPDATE tanpa mengubah kolom photo
 	try {
 		$stmt = $koneksi->prepare("UPDATE m_siswa SET angkatan = ?, nama = ?, nim = ?, jurusan = ? WHERE id = ?");
 		$stmt->bind_param("ssssi", $angkatan, $nama, $nim, $jurusan, $id);
@@ -134,7 +129,7 @@ if ($fileError !== UPLOAD_ERR_NO_FILE) {
 		?>
 		<script>
 			alert("Data berhasil diubah.");
-			window.location = "index.php";
+			window.location = "index-Copy.php";
 		</script>
 		<?php
 	} catch (mysqli_sql_exception $e) {
